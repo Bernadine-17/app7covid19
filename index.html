@@ -1,0 +1,230 @@
+<!DOCTYPE html> 
+<html> 
+<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.  Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
+ 
+THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
+ 
+ 
+Authors in chronological order of contribution:
+Tim Riedel
+Bernadine Decapia
+ 
+Further Information:
+http://cns.utexas.edu/fri
+ 
+Research Educator:
+Timothy Riedel
+triedel@utexas.edu
+ 
+Brief Description of Goal of Code:
+The goal of this code is to distinguish whether a person has the stomach flu or food poisoning. These two illnesses have a lot of similar symptoms but this survey will differentiate between the two with specific questions to analyze the proobability of having the two.
+ 
+Known Issues:
+Whenever the "Click to Show Results" button is clicked, it doesn't disappear and is displayed with the results.
+
+https://www.w3schools.com/w3css/default.asp
+https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
+-->
+	
+   <head> 
+      <title>DIY Diagnostics</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="w3.css">
+      <link rel="stylesheet" href="w3-colors-flat.css">
+   </head> 
+
+
+<script>
+        var flu_count = 0;
+        var poison_count = 0;
+//these two variables will reset both counts to zero every time the program is started. It ensures that the program will run the correct calculation when it shows the probability in the results page.
+	
+        function fluAdd(){
+            flu_count = flu_count + 1;
+
+        }
+//the fluAdd function will be attached to either the yes or no button depending on the question. It simply adds 1 to the flu_count variable which will later be used to calculate the percentage. It is the same concept that is applied to the coldAdd function.
+
+        function poisonAdd(){
+            poison_count = poison_count + 1;
+        }
+//this function is identiical to the fluAdd function except this is strictly for the food poisoning symptoms.
+	
+	function results(){
+		var fluPercent = flu_count/ (flu_count + poison_count) * 100;
+		var poisonPercent = poison_count/ (flu_count + poison_count) * 100;
+		var resultText = document.getElementById("results");
+		resultText.innerHTML = "Probability it is a stomach flu = " + fluPercent + "%<br> Probability it is food poisoning = " + poisonPercent + "%";
+	}
+//the results function calculates the percentage that the person has either the stomach flu or food poisoning by doing simple math: it takes however many counts it has on either stomach flu or food poisoning and divides by the total number of counts, which should be 6 questions on this survey. Lastly, it multiplies the entire calculation to 100 to turn the answer into a percentage.
+
+  </script>
+
+
+
+<style>	
+.body {
+     margin: 0em;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    overflow-y: auto;
+    z-index: 0;
+    background-color: hsl(0,0%,100%);
+}
+
+  .page:target {
+    left: 0vw;
+    z-index: 1;
+}
+
+img, object{
+	max-height:90%;
+	max-width:90%;
+        	}
+
+</style>
+<!--This style paragraph just structures how each webpage will look like (the layout) as the survey taker navigates through the six questions. -->
+<!--The img, object part of the style code makes sure that all pictures in the program are scaled to 90% of its height and width value. It keeps the size of the images uniform throughout and keeps the images suited for mobile use.-->
+<body>
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Stomach Flu or Food Poisoning?</h1>
+</div>
+<!--The header of the survey defines the purpose of the entire survey-->
+	
+<div id="content" class="w3-container">
+	<p>Do you feel like you have either food poisoning or the stomach flu? Answer a few short questions to differentiate between the two!</p>
+	
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
+	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+</div>
+	
+<!--This introductory webpage give more information what the survey is about. The button takes the user to the first page of the survey which has to do with one of the first main symptoms that is used to distinguish between the two. -->
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        	<p>Have you eaten leafy greens, fresh fruit, or shellfish recently?</p>
+			<a href="#two"  onclick="fluAdd();" class="w3-btn w3-green"> Yes</a>
+         		<a href="#two"  onclick="poisonAdd();" class="w3-btn w3-red">No</a>
+ 	</div>
+
+</div>
+
+<!--the structure of the first webpage was copied and pasted to make it easier and more consistent between the five other different webpages. The two buttons are attached to either the fluAdd or poisonAdd function that will keep tally of how many times a symptom of either is picked. -->
+<!--from the previous app, I changed the button color to red and green to make it more appealing instead of just having black buttons. -->
+
+<div class="page" id="two">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Have you eaten undercooked food recently?</p>
+			<img src="https://3.bp.blogspot.com/-5KBmrvkbQIg/TZDRe6RxSQI/AAAAAAAAAAs/_aspDNIM2wE/s1600/grilled-rare-steak.jpg" alt="steak with pink in the middle">
+			  
+			<a href="#three"  onclick="poisonAdd();" class="w3-btn w3-green"> Yes</a>
+         		<a href="#three"  onclick="fluAdd();" class="w3-btn w3-red">No</a>
+	</div>
+</div>
+
+<!--I had to switch the poisonAdd and fluAdd function because this particular conditiion is actually associated with the food poisoning, not the stomach flu. -->
+	
+<div class="page" id="three">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Have the symptoms of nausea, diarrhea, and vomiting lasted for more than a week?</p>
+			<a href="#four"  onclick="fluAdd();" class="w3-btn w3-green"> Yes</a>
+         		<a href="#four"  onclick="poisonAdd();" class="w3-btn w3-red">No</a>
+	</div>
+</div>
+	
+<!--It is a similar structure to the previous question so I didn't really have to change anythiing except for the question number, the question, and the page that it should refer to next after the button is clicked. -->
+	
+<div class="page" id="four">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>After experiencing symptoms, were other people you had physical contact with affected by it too?</p>
+			<a href="#five"  onclick="fluAdd();" class="w3-btn w3-green">Yes</a>
+         		<a href="#five"  onclick="poisonAdd();" class="w3-btn w3-red">No</a>
+	</div>
+</div>
+	
+<!--For this question, the stomach flu is more infectious than food poisoning because it's an actual viral infection that happens in the gastrointestinal system that can spread through bodily fluids -->
+	
+<div class="page" id="five">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you have extreme thirst and dehydration?</p>
+			<a href="#six"  onclick="fluAdd();" class="w3-btn w3-green"> Yes</a>
+         		<a href="#six"  onclick="poisonAdd();" class="w3-btn w3-red">No</a>
+	</div>
+</div>
+	
+<!--This symptom could apply to either but it is more common in the stomach flu than it is in food poisoning just because it is a viral infection in the gastrointestinal system which would later impact other systems in the body -->
+	
+<div class="page" id="six">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 6</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Have you experienced lightheadedness?</p>
+			<a href="#seven"  onclick="fluAdd();" class="w3-btn w3-green"> Yes</a>
+         		<a href="#seven"  onclick="poisonAdd();" class="w3-btn w3-red">No</a>
+	</div>
+</div>
+	
+<!--The last two questions were the same structure so all I had to change where the href values and the id of the webpage.-->
+	
+<div class="page" id="seven">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Results Processing</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<a href="#eight" onclick="results();" class="w3-btn w3-black">Click here to view results</a>	
+	</div>
+</div>
+
+<div class="page" id="eight">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Your Results!</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p id="results"></p>	
+	</div>
+</div>
+	
+<!--I changed something from my previous code and made 2 separate pages for the results. This part was just to clean how it showed the results because before, the button to show the results would stay and it looked super informal.-->
+<!--the onclick"results();" function would calculate all the percentages. The id="results" part would replace the html text in the body with whatever the program calculated for the results. -->
+
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>Bernadine's Diagnostic - DIY!</p>
+</footer>
+
+<!--This footer should be present in all the webpages!-->
+		
+</body>
+</html>
